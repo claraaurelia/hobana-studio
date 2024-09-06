@@ -7,4 +7,4 @@ class Product(models.Model):
 # Create your models here.
     @property
     def is_product_expensive(self):
-        return self.product_description > 100000
+        return self.product_price> 100000
