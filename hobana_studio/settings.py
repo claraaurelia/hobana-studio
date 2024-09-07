@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'e_commerce.urls'
+ROOT_URLCONF = 'hobana_studio.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'e_commerce.wsgi.application'
+WSGI_APPLICATION = 'hobana_studio.wsgi.application'
 
 
 # Database
