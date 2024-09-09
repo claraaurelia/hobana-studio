@@ -3,6 +3,9 @@ Nama : Clara Aurelia Setiady
 NPM : 23036217304  
 Kelas : PBP C  
 
+## Link PWS
+http://pbp.cs.ui.ac.id/clara.aurelia/hobanastudio 
+
 ## Proses Pembuatan Proyek Django
 1. Membuat repository baru dengan nama `hobana-studio`.
 2. Membuat folder lokal baru dan menginisiasi git dengan:  
