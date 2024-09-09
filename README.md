@@ -1,7 +1,7 @@
 # Tugas Individu 2 : Hobana Studio
-Nama : Clara Aurelia Setiady  
-NPM : 23036217304  
-Kelas : PBP C  
+Nama    : Clara Aurelia Setiady  
+NPM     : 23036217304  
+Kelas   : PBP C  
 
 ## Link PWS
 http://pbp.cs.ui.ac.id/clara.aurelia/hobanastudio 
