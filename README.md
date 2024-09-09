@@ -219,6 +219,7 @@ http://pbp.cs.ui.ac.id/clara.aurelia/hobanastudio
     ```
     - Proyek (Project) adalah keseluruhan proyek web yang kamu bangun dengan menggunakan Django. Proyek berisi berbagai aplikasi yang berfungsi secara bersama untuk menciptakan situs web atau aplikasi web yang lengkap.
     - Aplikasi (Apps) adalah unit modular yang melakukan tugas-tugas spesifik dalam suatu proyek Django. Setiap aplikasi dapat memiliki model, tampilan, template, dan URL yang terkait dengannya. Aplikasi memungkinkanmu untuk membagi fungsionalitas proyek menjadi bagian-bagian terpisah yang dapat dikelola secara independen.
+    - Ex : Django Project -> 1. Django App (Forum Diskusi), 2. Django App (List of Product), 3. Django App (Shopping Cart)
 
 13. Menambahkan aplikasi tersebut ke `INSTALLED_APPS` pada berkas `settings.py`
     ```
