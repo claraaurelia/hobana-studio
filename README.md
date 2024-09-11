@@ -4,7 +4,7 @@ NPM     : 23036217304
 Kelas   : PBP C  
 
 ## Link PWS
-http://pbp.cs.ui.ac.id/clara.aurelia/hobanastudio 
+http://pbp.cs.ui.ac.id/clara.aurelia/hobanastudioo 
 
 ## Proses Pembuatan Proyek Django
 1. Membuat repository baru dengan nama `hobana-studio`.
