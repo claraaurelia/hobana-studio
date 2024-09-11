@@ -349,6 +349,7 @@ Isi berkas models.py dengan  atribut name, price, description
 
 ## 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 ![Alt text](image/bagan_django.png)
+![Alt text](image/bagan.png)
 
 - **Client Request** -> User membuat permintaan HTTP (Ex: Mengunjungi URL di browser).
 - **urls.py** -> memetakan URL yang diminta ke fungsi view yang sesuai di views.py
