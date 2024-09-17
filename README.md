@@ -731,3 +731,9 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
   'crsf_token' berguna untuk melindungi aplikasi dari serangan CSRF (Cross-Site Request Forgery). CSRF adalah jenis serangan di mana penyerang mencoba mengelabui pengguna yang telah diautentikasi untuk melakukan aksi yang tidak sah di situs web
 </details>
 
+##6. Screenshot Postman
+![Alt text](image/id_ss.png)
+![Alt text](image/json_id_ss.png)
+![Alt text](image/json_ss.png)
+![Alt text](image/xml_ss.png)
+
