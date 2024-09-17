@@ -359,6 +359,7 @@ Isi berkas models.py dengan  atribut name, price, description
 - **Template html** -> View kemudian menggunakan template HTML untuk membangun halaman yang akan dikirim kembali ke client. Template berisi HTML dan dapat menggunakan variabel yang dikirim dari view untuk menampilkan data dinamis.
 - **Client Response** -> Setelah template di render, hasilnya dikirim sebagai respons HTTP kembali ke Client dan Client dapat melihat tampilannya dalam browser web
 
+
 ## 3. Jelaskan fungsi git dalam pengembangan perangkat lunak!
 - **Melacak Perubahan Kode**  
   Git mencatat setiap perubahan yang dilakukan, memungkinkan developer untuk melihat riwayat perubahan, memeriksa versi sebelumnya, dan membandingkan perbedaan antara versi. Git juga memungkinan pengembalian kode ke versi sebelumnya dengan muda.
@@ -368,6 +369,7 @@ Isi berkas models.py dengan  atribut name, price, description
   Git sering digunakan dalam pipeline Continuous Integration/Continuous Deployment (CI/CD) untuk otomatisasi build, pengujian, dan penyebaran kode. Ini meningkatkan efisiensi dan kecepatan pengembangan perangkat lunak.
 - **Kolaborasi Terdistribusi**   
   Git adalah sistem terdistribusi, artinya setiap developer memiliki salinan lengkap dari seluruh riwayat proyek di repositori lokal mereka. Ini memungkinkan pengembang untuk bekerja secara offline dan sinkronisasi dengan repositori pusat saat mereka online.
+
 
 ## 4. Menurut Anda, dari semua framework yang ada, mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?
 - **Desain yang Terstruktur**   
@@ -379,6 +381,7 @@ Isi berkas models.py dengan  atribut name, price, description
 - **Penggunaan Python**  
   Bahasa pemrograman ini memiliki sintaks yang sederhana dan mudah dipahami, serta berguna untuk digunakan dalam berbagai bidang. Selain itu, Python memiliki ekosistem yang kaya dengan berbagai libraries dan tools yang dapat digunakan bersama Django.
 
+
 ## 5. Mengapa model pada Django disebut sebagai ORM?
 - Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena mereka merupakan bagian dari sistem ORM yang menghubungkan objek dalam kode Python dengan data yang disimpan dalam basis data relasional. ORM adalah teknik dalam pemrograman yang memungkinkan developer untuk berinteraksi dengan basis data menggunakan objek dan metode dalam bahasa pemrograman, alih-alih menggunakan SQL langsung.
 </details>
@@ -389,9 +392,9 @@ Nama    : Clara Aurelia Setiady  <br>
 NPM     : 23036217304  <br>
 Kelas   : PBP C  
 
-## Proses Implementasi 
-1. Implementasi Skeleton sebagai Kerangka Views
-- Buat direktori `templates` pada direktori utama dan buat berkas HTML baru bernama `base.html`. Berkas ini berfungsi sebagai template dasar yang dapat digunakan sebagai kerangka umum untuk halaman web lainnya di dalam proyek.
+## Proses Implementasi Checklist
+### 1. Implementasi Skeleton sebagai Kerangka Views
+   - Buat direktori `templates` pada direktori utama dan buat berkas HTML baru bernama `base.html`. Berkas ini berfungsi sebagai template dasar yang dapat digunakan sebagai kerangka umum untuk halaman web lainnya di dalam proyek.
     ```
         {% load static %}
     <!DOCTYPE html>
@@ -422,9 +425,9 @@ Kelas   : PBP C
     ...
     ```
     - Pastikan APP_DIRS bernilai True
-- Ubah kode main.htl di subdirektori main/templates/ dengan
+- Ubah kode main.html di subdirektori main/templates/ dengan
     ```
-     {% extends 'base.html' %}
+    {% extends 'base.html' %}
     {% block content %}
     <h1>Mental Health Tracker</h1>
 
@@ -438,7 +441,9 @@ Kelas   : PBP C
     <p>{{ class }}</p>
     {% endblock content %}
     ```
-2. Ubah Primary Key dari Integer ke UUID
+
+    
+### 2. Ubah Primary Key dari Integer ke UUID
     - Secara default, ID dari setiap objek model yang akan dibuat menggunakan tipe data integer yang incremental (start dari 1). Hal ini tidak aman karena bisa menjadi salah satu celah keamanan aplikasi Django
     - Untuk best practice harus ada perubahan di berkas models.py di subdirektori `main/`
     ```
@@ -460,7 +465,9 @@ Kelas   : PBP C
     python manage.py makemigrations
     python manage.py migrate
     ```
-3. Membuat form input data dan menampilkan data pada html
+
+    
+### 3. Membuat form input data dan menampilkan data pada html
 - Buat berkas baru pada direktori `main` dengan nama `forms.py` untuk membuat struktur form yang dapat menerima product baru. Lalu tambahkan kode berikut
 ```
 from django.forms import ModelForm
@@ -582,50 +589,53 @@ urlpatterns = [
 ```
 - Coba jalankan 'http://localhost:8000/'
 
-3. Mengembalikan Data dalam Bentuk XML
+
+### 4. Mengembalikan Data dalam Bentuk XML
 - Buka 'views.py' pada direktori 'main' dan tambahkan import
-'''
+```
 from django.http import HttpResponse
 from django.core import serializers
-'''
+```
 - Setelah itu, buat fungsi baru yang menerima paramter request
-'''
+```
 def show_xml(request):
     data = ProductEntry.objects.all()
-'''
+```
 - Tambah return function berupa 'HttpResponse' yang berisi parameter data hasil query yang sudah diserialisasi menjadi XML dan parameter 'content_type="application/xml"'
-'''
+```
 def show_xml(request):
     data = MoodEntry.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
-'''
+```
     - serializers -> untuk translate objek model menjadi format lain (contohnya XML)
 - Buka 'urls.py' pada direktori 'main' dan import fungsi barusan
-'''
+```
 from main.views import show_main, create_mood_entry, show_xml
-'''
+```
 
-4. Mengembalikan Data dalam Bentuk JSON
-- Pada 'views.py' direktori 'main' buat sebuah fungsi baru dengan variabel di dalamnya yang menyimpan hasil query dari seluruh data yang ada pada ProoductEntry dan tmabahin return function
-'''
+
+### 5. Mengembalikan Data dalam Bentuk JSON
+- Pada `views.py` direktori 'main' buat sebuah fungsi baru dengan variabel di dalamnya yang menyimpan hasil query dari seluruh data yang ada pada ProoductEntry dan tmabahin return function
+```
 def show_json(request):
     data = MoodEntry.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
-'''
+```
 - Import fungsi barusan ke 'urls.py'
-'''
+```
 from main.views import show_main, create_mood_entry, show_xml, show_json
-'''
+```
 
-- Tambahkan juga ke urlpattern
-'''
+- Tambahkan juga ke `urlpattern`
+```
 path('json/', show_json, name='show_json'),
-'''
+```
 - Bisa dicek dengan 'http://localhost:8000/json/'
 
-5. Mengembalikan Data Berdasarkan ID dalam bentuk XML dan JSON
+
+### 6. Mengembalikan Data Berdasarkan ID dalam bentuk XML dan JSON
 - Pada 'views.py' di direktori 'main' buat dua fungsi baru yang menerima parameter 'request' dan 'id', buat variabel terlebih dahulu
-'''
+```
 data = ProductEntry.objects.filter(pk=id)
 
 def show_xml_by_id(request, id):
@@ -635,20 +645,21 @@ def show_xml_by_id(request, id):
 def show_json_by_id(request, id):
     data = ProductEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
-'''
+```
 - Setelah itu import fungsi pada 'urls.py' dan tambahkan path url nya pada urlpatterns
-'''
+```
 from main.views import show_main, create_mood_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
-'''
-'''
+```
+```
 path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
 path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
-'''
+```
 
-6. Penggunaan postman
+
+### 7. Penggunaan postman
 - Jalankan server, lalu buat reuest baru dengan method 'GET'
 - Melakukan Push ke PWS secara otomatis dengan
-'''
+```
 name: Push to PWS
 
 on:
@@ -697,7 +708,8 @@ jobs:
             exit 1
           fi
           echo "Push successful with output: $push_output"
-'''
+```
+
 
 ## 2. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 Data delivery penting untuk memastikan bahwa data yang dihasilkan, dikumpulkan, dan diproses oleh platform dapat diakses dan digunakan oleh berbagai pihak yang memerlukannya
@@ -708,6 +720,7 @@ Data delivery penting untuk memastikan bahwa data yang dihasilkan, dikumpulkan, 
 - **Optimasi Kinerja dan Efisiensi**
   Data Delivery memastikan bahwa data ditransfer dengan cepat dan tanpa hambatan, sehingga platform dapat berjalan dengan baik dan lancar
 
+
 ## 3. Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
 Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meskipun begitu, JSON lebih populer dan dianggap lebih baik dikarenakan kesederhanaan dan keringkasannya. Berikut beberapa alasan tambahan yang mendukung pernyataan sebelumnya:
 - **Lebih Cepat dan Efisien**   
@@ -716,6 +729,7 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
   Banyak layanan API modern menggunakan JSON sebagai format default untuk komunikasi data
 - **Parsing yang Lebih Mudah**
   JSON lebih cepat untuk diparse, terutama karena dukungannya yang menjadi bawaan di banyak bahasa pemrograman (JavaScript, Python, Ruby, dll)
+
 
 ## 4. Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
   Method is_valid() pada form Django berfungsi untuk melakukan validasi data yang dimasukkan oleh pengguna melalui form. Method ini memastikan bahwa data yang diterima sesuai dengan aturan validasi yang telah didefinisikan dalam form tersebut.
@@ -727,11 +741,12 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
     - Jika valid, data bersih dapat diakses melalui form.cleaned_data dan dapat disimpan atau diproses lebih lanjut.
     - Jika tidak valid, error message dapat diambil dari form.errors dan ditampilkan kembali kepada pengguna.
 
+
 ## 5. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
-  'crsf_token' berguna untuk melindungi aplikasi dari serangan CSRF (Cross-Site Request Forgery). CSRF adalah jenis serangan di mana penyerang mencoba mengelabui pengguna yang telah diautentikasi untuk melakukan aksi yang tidak sah di situs web
+  `crsf_token` berguna untuk melindungi aplikasi dari serangan CSRF (Cross-Site Request Forgery). CSRF adalah jenis serangan di mana penyerang mencoba mengelabui pengguna yang telah diautentikasi untuk melakukan aksi yang tidak sah di situs web
 
 
-##6. Screenshot Postman
+## 6. Screenshot Postman
 ![Alt text](image/id_ss.png)
 ![Alt text](image/json_id_ss.png)
 ![Alt text](image/json_ss.png)
