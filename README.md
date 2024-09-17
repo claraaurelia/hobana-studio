@@ -519,7 +519,7 @@ def create_product_entry(request):
      - `ProductEntry.objects.all()` untuk mengambil seluruh objek ProductEntry yang tersimpan pada database
 - Buka `urls.py` yang ada pada direktori `main` dan import fungsi `create_product_entry`
 ```
-from main.views import show_main, product_mood_entry
+from main.views import show_main, product_product_entry
 ```
 - Tambahkan path URL ke variabel `urlpatterns` pada `urls.py` di `main`
 ```
@@ -553,37 +553,35 @@ urlpatterns = [
  - `{% csrf_token %} adalah token yang berfungsi sebagai security dan di generate secara otomatis oleh Django untuk mencegah serangan berbahaya
  - `{{ form.as_table }} adalah template tag yang digunakan untuk menampilkan fields form yang sudah dibuat di `forms.py` sebagai table
  - `<input type="submit" value = "Add Product Entry"/>` digunakan sebagai tombol submit untuk mengirimkan request ke view `create_product_entry(request)'
-- Buka `main.html` dan untuk menampilkan data mood dalam bentuk tabel serta tombol "Add New Product Entry" yang akan redirect ke halaman form dengan menambahkan kode berikut ke dalam `{% block content %}`
+- Buka `main.html` dan untuk menampilkan data produk dalam bentuk tabel serta tombol "Add New Product Entry" yang akan redirect ke halaman form dengan menambahkan kode berikut ke dalam `{% block content %}`
 ```
 ...
 {% if not product_entries %}
-<p>Belum ada data produk pada mental health tracker.</p>
+<p>Belum ada data product pada aplikasi.</p>
 {% else %}
 <table>
   <tr>
-    <th>Mood Name</th>
-    <th>Time</th>
-    <th>Feeling</th>
-    <th>Mood Intensity</th>
+    <th>Product Name</th>
+    <th>Product Price</th>
+    <th>Product Description</th>
   </tr>
-
-  {% comment %} Berikut cara memperlihatkan data mood di bawah baris ini 
+  
+  {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini 
   {% endcomment %} 
-  {% for mood_entry in mood_entries %}
+  {% for product_entry in product_entries %}
   <tr>
-    <td>{{mood_entry.mood}}</td>
-    <td>{{mood_entry.time}}</td>
-    <td>{{mood_entry.feelings}}</td>
-    <td>{{mood_entry.mood_intensity}}</td>
+    <td>{{product_entry.product_name}}</td>
+    <td>{{product_entry.product_description}}</td>
+    <td>{{product_entry.product_price}}</td>
   </tr>
   {% endfor %}
 </table>
-{% endif %}
+{% endif %} 
 
 <br />
 
-<a href="{% url 'main:create_mood_entry' %}">
-  <button>Add New Mood Entry</button>
+<a href="{% url 'main:create_product_entry' %}">
+  <button>Add New Product Entry</button>
 </a>
 {% endblock content %}
 ```
@@ -604,13 +602,13 @@ def show_xml(request):
 - Tambah return function berupa 'HttpResponse' yang berisi parameter data hasil query yang sudah diserialisasi menjadi XML dan parameter 'content_type="application/xml"'
 ```
 def show_xml(request):
-    data = MoodEntry.objects.all()
+    data = ProductEntry.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 ```
  - serializers -> untuk translate objek model menjadi format lain (contohnya XML)
 - Buka `urls.py` pada direktori 'main' dan import fungsi barusan
 ```
-from main.views import show_main, create_mood_entry, show_xml
+from main.views import show_main, create_product_entry, show_xml
 ```
 
 
@@ -618,12 +616,12 @@ from main.views import show_main, create_mood_entry, show_xml
 - Pada `views.py` direktori 'main' buat sebuah fungsi baru dengan variabel di dalamnya yang menyimpan hasil query dari seluruh data yang ada pada ProoductEntry dan tmabahin return function
 ```
 def show_json(request):
-    data = MoodEntry.objects.all()
+    data = ProductEntry.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 ```
 - Import fungsi barusan ke 'urls.py'
 ```
-from main.views import show_main, create_mood_entry, show_xml, show_json
+from main.views import show_main, create_product_entry, show_xml, show_json
 ```
 
 - Tambahkan juga ke `urlpattern`
@@ -648,7 +646,7 @@ def show_json_by_id(request, id):
 ```
 - Setelah itu import fungsi pada 'urls.py' dan tambahkan path url nya pada urlpatterns
 ```
-from main.views import show_main, create_mood_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
+from main.views import show_main, create_product_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
 ```
 ```
 path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
