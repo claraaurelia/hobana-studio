@@ -395,22 +395,22 @@ Kelas   : PBP C
 ## Proses Implementasi Checklist
 ### 1. Implementasi Skeleton sebagai Kerangka Views
    - Buat direktori `templates` pada direktori utama dan buat berkas HTML baru bernama `base.html`. Berkas ini berfungsi sebagai template dasar yang dapat digunakan sebagai kerangka umum untuk halaman web lainnya di dalam proyek.
-    ```
-        {% load static %}
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        {% block meta %} {% endblock meta %}
-    </head>
-
-    <body>
-        {% block content %} {% endblock content %}
-    </body>
-    </html>
-    ```
-    - Template tags `{% ... %}` berfungsi untuk memuat data secara dinamis dari Django ke HTML. Pada contoh di atas, tag tersebut di Django digunakan untuk mendefinisikan area dalam template yang dapat diganti oleh template turunan. Template turunan akan me-extend template dasar (pada contoh ini base.html) dan mengganti konten di dalam block ini sesuai kebutuhan.
+       ```
+       {% load static %}
+       <!DOCTYPE html>
+       <html lang="en">
+       <head>
+           <meta charset="UTF-8" />
+           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+           {% block meta %} {% endblock meta %}
+       </head>
+   
+       <body>
+           {% block content %} {% endblock content %}
+       </body>
+       </html>
+       ```
+ - Template tags `{% ... %}` berfungsi untuk memuat data secara dinamis dari Django ke HTML. Pada contoh di atas, tag tersebut di Django digunakan untuk mendefinisikan area dalam template yang dapat diganti oleh template turunan. Template turunan akan me-extend template dasar (pada contoh ini base.html) dan mengganti konten di dalam block ini sesuai kebutuhan.
 - Lalu buka `settings.py` pada direktori `hobana_studio` dan tambahkan di bagian variabel `TEMPLATES`, agar berkas base.html terdekteksi sebagai berkas template
     ```
     ...
@@ -424,7 +424,7 @@ Kelas   : PBP C
     ]
     ...
     ```
-    - Pastikan APP_DIRS bernilai True
+    - Pastikan `APP_DIRS` bernilai True
 - Ubah kode main.html di subdirektori main/templates/ dengan
     ```
     {% extends 'base.html' %}
@@ -444,8 +444,8 @@ Kelas   : PBP C
 
     
 ### 2. Ubah Primary Key dari Integer ke UUID
-    - Secara default, ID dari setiap objek model yang akan dibuat menggunakan tipe data integer yang incremental (start dari 1). Hal ini tidak aman karena bisa menjadi salah satu celah keamanan aplikasi Django
-    - Untuk best practice harus ada perubahan di berkas models.py di subdirektori `main/`
+ - Secara default, ID dari setiap objek model yang akan dibuat menggunakan tipe data integer yang incremental (start dari 1). Hal ini tidak aman karena bisa menjadi salah satu celah keamanan aplikasi Django
+ - Untuk best practice harus ada perubahan di berkas models.py di subdirektori `main/`
     ```
     import uuid
     from django.db import models
@@ -478,8 +478,8 @@ class ProductEntryForm(ModelForm):
         model = ProductEntry
         fields = ["product_name", "product_price", "product_description"]
 ```
-    - `model = ProductEntry` untuk menunjukkan model yang akan digunakan untuk form, isi dari form akan disimpan dalam objek ProductEntry
-    - `fields = ["product_name", "product_price", "product_description"]` untuk menunjukkan field dari model `ProductEntry` yang digunakan untuk form
+ - `model = ProductEntry` untuk menunjukkan model yang akan digunakan untuk form, isi dari form akan disimpan dalam objek ProductEntry
+ - `fields = ["product_name", "product_price", "product_description"]` untuk menunjukkan field dari model `ProductEntry` yang digunakan untuk form
 - Buka berkas `views.py` pada direktori `main` dan tambahkan import berikut
 ```
 from django.shortcuts import render, redirect   # Tambahkan import redirect di baris ini
@@ -498,11 +498,11 @@ def create_product_entry(request):
     context = {'form': form}
     return render(request, "create_product_entry.html", context)
 ```
-        - `form = ProductEntryForm(request.POST or None)` untuk membuat ProductEntryForm baru dengan memasukkan QueryDict berdasarkan input dari user pada `request.POST`.
-        - `form.is_valid()` untuk memvalidasi isi input dari form tersebut
-        - `form.save()` untuk membuat dan menyimpan data dari form
-        - `return redirect ('main:show_main)` untuk melakukan redirect ke fungsi `show_main` pada views aplikasi `main` setelah data form berhasil disimpan
-    - Ubah fungsi `show_main` yang udah ada di berkas views.py
+  - `form = ProductEntryForm(request.POST or None)` untuk membuat ProductEntryForm baru dengan memasukkan QueryDict berdasarkan input dari user pada `request.POST`.
+  - `form.is_valid()` untuk memvalidasi isi input dari form tersebut
+  - `form.save()` untuk membuat dan menyimpan data dari form
+  - `return redirect ('main:show_main)` untuk melakukan redirect ke fungsi `show_main` pada views aplikasi `main` setelah data form berhasil disimpan
+ - Ubah fungsi `show_main` yang udah ada di berkas views.py
     ```
     def show_main(request):
     product_entries = ProductEntry.objects.all()
@@ -516,7 +516,7 @@ def create_product_entry(request):
 
     return render(request, "main.html", context)
     ```
-        - `ProductEntry.objects.all() untuk mengambil seluruh objek ProductEntry yang tersimpan pada database
+     - `ProductEntry.objects.all()` untuk mengambil seluruh objek ProductEntry yang tersimpan pada database
 - Buka `urls.py` yang ada pada direktori `main` dan import fungsi `create_product_entry`
 ```
 from main.views import show_main, product_mood_entry
@@ -549,10 +549,10 @@ urlpatterns = [
 
 {% endblock %}
 ```
-    - `<form method="POST>` untuk menandakan block untuk form dengan metode POST
-    - `{% csrf_token %} adalah token yang berfungsi sebagai security dan di generate secara otomatis oleh Django untuk mencegah serangan berbahaya
-    - `{{ form.as_table }} adalah template tag yang digunakan untuk menampilkan fields form yang sudah dibuat di `forms.py` sebagai table
-    - `<input type="submit" value = "Add Product Entry"/>` digunakan sebagai tombol submit untuk mengirimkan request ke view `create_product_entry(request)'
+ - `<form method="POST>` untuk menandakan block untuk form dengan metode POST
+ - `{% csrf_token %} adalah token yang berfungsi sebagai security dan di generate secara otomatis oleh Django untuk mencegah serangan berbahaya
+ - `{{ form.as_table }} adalah template tag yang digunakan untuk menampilkan fields form yang sudah dibuat di `forms.py` sebagai table
+ - `<input type="submit" value = "Add Product Entry"/>` digunakan sebagai tombol submit untuk mengirimkan request ke view `create_product_entry(request)'
 - Buka `main.html` dan untuk menampilkan data mood dalam bentuk tabel serta tombol "Add New Product Entry" yang akan redirect ke halaman form dengan menambahkan kode berikut ke dalam `{% block content %}`
 ```
 ...
@@ -607,8 +607,8 @@ def show_xml(request):
     data = MoodEntry.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 ```
-    - serializers -> untuk translate objek model menjadi format lain (contohnya XML)
-- Buka 'urls.py' pada direktori 'main' dan import fungsi barusan
+ - serializers -> untuk translate objek model menjadi format lain (contohnya XML)
+- Buka `urls.py` pada direktori 'main' dan import fungsi barusan
 ```
 from main.views import show_main, create_mood_entry, show_xml
 ```
@@ -740,6 +740,14 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
   - Validasi Data: is_valid() dijalankan untuk memeriksa apakah data yang diisi valid.
     - Jika valid, data bersih dapat diakses melalui form.cleaned_data dan dapat disimpan atau diproses lebih lanjut.
     - Jika tidak valid, error message dapat diambil dari form.errors dan ditampilkan kembali kepada pengguna.
+
+**Mengapa Kita Membutuhkan is_valid()?**
+- **Memastikan Keamanan Data:**
+  Validasi data sangat penting untuk menjaga aplikasi dari data yang tidak sah atau berpotensi merusak. Misalnya, kita dapat memeriksa apakah data yang diterima adalah dalam format yang benar (seperti email, angka, tanggal, dsb.).
+- **Mencegah Kesalahan Logika dan Aplikasi:**
+  Jika data yang tidak valid diproses langsung tanpa validasi, ini dapat menyebabkan kesalahan dalam aplikasi, seperti crash, operasi yang gagal, atau data yang tidak diinginkan disimpan di basis data.
+- **Penanganan Error yang Efisien:**
+  Dengan is_valid(), pengembang dapat dengan mudah menangani error, karena pesan kesalahan otomatis dikumpulkan dan dapat ditampilkan di halaman form sehingga pengguna bisa memperbaiki input mereka.
 
 
 ## 5. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
