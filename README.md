@@ -381,8 +381,13 @@ Isi berkas models.py dengan  atribut name, price, description
 
 ## 5. Mengapa model pada Django disebut sebagai ORM?
 - Model pada Django disebut sebagai ORM (Object-Relational Mapping) karena mereka merupakan bagian dari sistem ORM yang menghubungkan objek dalam kode Python dengan data yang disimpan dalam basis data relasional. ORM adalah teknik dalam pemrograman yang memungkinkan developer untuk berinteraksi dengan basis data menggunakan objek dan metode dalam bahasa pemrograman, alih-alih menggunakan SQL langsung.
+</details>
 
+<details>
 <summary>Tugas 3: Implementasi Form dan Data Delivery pada Django</summary>
+Nama    : Clara Aurelia Setiady  <br>
+NPM     : 23036217304  <br>
+Kelas   : PBP C  
 
 </details>
 
