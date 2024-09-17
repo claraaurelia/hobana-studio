@@ -729,5 +729,11 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
 
 ## 5. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
   'crsf_token' berguna untuk melindungi aplikasi dari serangan CSRF (Cross-Site Request Forgery). CSRF adalah jenis serangan di mana penyerang mencoba mengelabui pengguna yang telah diautentikasi untuk melakukan aksi yang tidak sah di situs web
-</details>
 
+
+##6. Screenshot Postman
+![Alt text](image/id_ss.png)
+![Alt text](image/json_id_ss.png)
+![Alt text](image/json_ss.png)
+![Alt text](image/xml_ss.png)
+</details>
