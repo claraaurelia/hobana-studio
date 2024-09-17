@@ -744,6 +744,18 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
 
 ## 5. Mengapa kita membutuhkan csrf_token saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan csrf_token pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
   `crsf_token` berguna untuk melindungi aplikasi dari serangan CSRF (Cross-Site Request Forgery). CSRF adalah jenis serangan di mana penyerang mencoba mengelabui pengguna yang telah diautentikasi untuk melakukan aksi yang tidak sah di situs web
+  Alasan Menggunakan csrf_token:
+   - CSRF token adalah mekanisme keamanan yang memastikan bahwa form yang dikirimkan berasal dari sumber yang sah (pengguna yang valid) dan bukan dari situs eksternal yang berbahaya.
+   - Token ini adalah string acak yang dihasilkan secara unik untuk setiap sesi pengguna atau request tertentu, dan harus dikirimkan bersama form untuk memvalidasi bahwa aksi yang dilakukan oleh pengguna sah.
+
+   Jika kita tidak menambahkan csrf_token pada form di Django, aplikasi menjadi rentan terhadap serangan CSRF. Tanpa token ini, penyerang dapat membuat sebuah halaman yang berisi form tersembunyi atau skrip yang secara otomatis mengirimkan permintaan ke aplikasi Django. Jika pengguna sudah login ke aplikasi tersebut, permintaan akan diproses seolah-olah itu permintaan yang sah, meskipun sebenarnya dimanipulasi oleh penyerang.
+   Penyerang bisa:
+   - Mengirimkan permintaan palsu ke server atas nama pengguna yang sah tanpa sepengetahuan mereka.
+   - Melakukan aksi tidak sah seperti perubahan password, transaksi finansial, atau pengiriman data sensitif jika pengguna sudah login dan terautentikasi.
+   - Menggunakan metode seperti phishing, di mana pengguna diarahkan ke halaman berbahaya yang mengirimkan permintaan CSRF ke aplikasi yang rentan.
+   Contohnya, jika sebuah aplikasi bank tidak menggunakan csrf_token, penyerang bisa mengirimkan form tersembunyi dari situs lain yang, ketika dibuka oleh pengguna yang sudah login, akan mengirimkan permintaan transfer uang tanpa disadari.
+
+   Dengan csrf_token, server bisa memverifikasi apakah permintaan itu sah berasal dari aplikasi itu sendiri, sehingga mencegah serangan CSRF.
 
 
 ## 6. Screenshot Postman
