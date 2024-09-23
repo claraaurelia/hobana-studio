@@ -1024,11 +1024,11 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
       return response
   ```
   ## 2. Apa perbedaan antara `HttpResponseRedirect()` dan `redirect()`
-    Keduanya mengarahkan pengguna ke URL lain, tetapi terdapat juga beberapa perbedaan sebagai berikut:
-    a. **Kegunaan**
-      `redirect()` lebih mudah digunakan karena dapat menangani nama view dan objek model, sedangkan `HttpResponseRedirect()` hanya menerima URL String
-    b. **Fleksibilitas**
-      `redirect()` memiliki kemampuan ekstra untuk otomatis membangun URL dari nama view / objek model, sehingga lebih efisien dalam banyak kasus
+ Keduanya mengarahkan pengguna ke URL lain, tetapi terdapat juga beberapa perbedaan sebagai berikut:
+ a. **Kegunaan**
+   `redirect()` lebih mudah digunakan karena dapat menangani nama view dan objek model, sedangkan `HttpResponseRedirect()` hanya menerima URL String
+ b. **Fleksibilitas**
+   `redirect()` memiliki kemampuan ekstra untuk otomatis membangun URL dari nama view / objek model, sehingga lebih efisien dalam banyak kasus
     
   ## 3. Jelaskan cara kerja penghubungan model `Product` dengan `User`!
   Model `Product` dapat dihubungkan dengan model `User` dalam Django menggunakan relasi **ForeignKey**. Relasi ini memungkinkan setiap produk yang dibuat oleh pengguna terasosiasi dengan pengguna tertentu. Dalam hal ini, model `Product` akan memiliki field `owner` yang merupakan **ForeignKey** ke model `User`. ForeignKey ini mengindikasikan bahwa satu pengguna dapat memiliki banyak produk, tetapi setiap produk hanya dimiliki oleh satu pengguna (relasi many-to-one). 
