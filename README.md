@@ -772,13 +772,13 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
 </details>
 
 <details>
-  <summary> Tugas Individi 4 : Implementasi Autentikasi, Session, dan Cookies pada Django</summary>
+  <summary> Tugas Individu 4 : Implementasi Autentikasi, Session, dan Cookies pada Django</summary>
   Nama    : Clara Aurelia Setiady  <br>
   NPM     : 23036217304  <br>
   Kelas   : PBP C  
 
-  ## Proses Implementasi
-  1. Mengimplementasikan Fungsi Registrasi, Login, dan Logout
+  ## 1. Proses Implementasi
+  ### Mengimplementasikan Fungsi Registrasi, Login, dan Logout
   - Tambahkan import `UserCreationForm` dan `messages` pada `views.py` subdirektori `main`
   ```
   from django.contrib.auth.forms import UserCreationForm
@@ -951,42 +951,9 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
   def show_main(request):
   ```
 
-  5. Menggunakan Data dari Cookies
-  - Pada `views.py`, tambahkan:
-    ```
-    import datetime
-    from django.http import HttpResponseRedirect
-    from django.urls import reverse
-    ```
-  - Pada function `login_user`, tambahkan fungsionalitas tambah cookie (untuk melihat kapan terakhir kali pengguna login)
-  ```
-  if form.is_valid():
-    user = form.get_user()
-    login(request, user)
-    response = HttpResponseRedirect(reverse("main:show_main"))
-    response.set_cookie('last_login', str(datetime.datetime.now()))
-    return response
-  ```
-  - Tambahkan kode `last_login` berikut ke variabel context
-  ```
-  context = {
-      'name': 'Pak Bepe',
-      'class': 'PBP D',
-      'npm': '2306123456',
-      'mood_entries': mood_entries,
-      'last_login': request.COOKIES['last_login'],
-  }
-  ```
-  - Ubah fungsi `logout_user`
-  ```
-  def logout_user(request):
-      logout(request)
-      response = HttpResponseRedirect(reverse('main:login'))
-      response.delete_cookie('last_login')
-      return response
-  ```
+  5. Buat dua akun pengguna dengan tiga dummy data
 
-  6. Menghubungkan Model dengan User
+  ### Menghubungkan Model Product dengan User
   - Pada `models.py`, tambahkan kode berikut:
   ```
   from django.contrib.auth.models import User
@@ -1021,4 +988,89 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
           'name': request.user.username,
       }
   ```  
+
+  ### Menggunakan Data dari Cookies
+  - Pada `views.py`, tambahkan:
+    ```
+    import datetime
+    from django.http import HttpResponseRedirect
+    from django.urls import reverse
+    ```
+  - Pada function `login_user`, tambahkan fungsionalitas tambah cookie (untuk melihat kapan terakhir kali pengguna login)
+  ```
+  if form.is_valid():
+    user = form.get_user()
+    login(request, user)
+    response = HttpResponseRedirect(reverse("main:show_main"))
+    response.set_cookie('last_login', str(datetime.datetime.now()))
+    return response
+  ```
+  - Tambahkan kode `last_login` berikut ke variabel context
+  ```
+  context = {
+      'name': 'Pak Bepe',
+      'class': 'PBP D',
+      'npm': '2306123456',
+      'mood_entries': mood_entries,
+      'last_login': request.COOKIES['last_login'],
+  }
+  ```
+  - Ubah fungsi `logout_user`
+  ```
+  def logout_user(request):
+      logout(request)
+      response = HttpResponseRedirect(reverse('main:login'))
+      response.delete_cookie('last_login')
+      return response
+  ```
+  ## 2. Apa perbedaan antara `HttpResponseRedirect()` dan `redirect()`
+    Keduanya mengarahkan pengguna ke URL lain, tetapi terdapat juga beberapa perbedaan sebagai berikut:
+    a. **Kegunaan**
+      `redirect()` lebih mudah digunakan karena dapat menangani nama view dan objek model, sedangkan `HttpResponseRedirect()` hanya menerima URL String
+    b. **Fleksibilitas**
+      `redirect()` memiliki kemampuan ekstra untuk otomatis membangun URL dari nama view / objek model, sehingga lebih efisien dalam banyak kasus
+    
+  ## 3. Jelaskan cara kerja penghubungan model `Product` dengan `User`!
+  Model `Product` dapat dihubungkan dengan model `User` dalam Django menggunakan relasi **ForeignKey**. Relasi ini memungkinkan setiap produk yang dibuat oleh pengguna terasosiasi dengan pengguna tertentu. Dalam hal ini, model `Product` akan memiliki field `owner` yang merupakan **ForeignKey** ke model `User`. ForeignKey ini mengindikasikan bahwa satu pengguna dapat memiliki banyak produk, tetapi setiap produk hanya dimiliki oleh satu pengguna (relasi many-to-one). 
+  
+  Ketika pengguna membuat produk baru, Django akan otomatis mengaitkan produk tersebut dengan pengguna yang sedang login melalui `request.user`. Selain itu, jika pengguna tersebut dihapus dari sistem, semua produk yang terkait dengannya akan dihapus juga, jika kita menggunakan opsi `on_delete=models.CASCADE`. Hubungan ini memudahkan dalam mengelola dan memfilter produk berdasarkan pengguna, misalnya menampilkan hanya produk-produk yang dimiliki oleh pengguna yang sedang login.
+
+  ## 4. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+  **Perbedaan**
+  - **Authentication** adalah proses untuk memverifikasi identitas pengguna. Ini mencakup langkah-langkah yang memastikan bahwa seseorang yang mengklaim sebagai pengguna tertentu adalah benar-benar pengguna tersebut.
+    - Contohnya adalah ketika pengguna memasukkan nama pengguna dan kata sandi untuk masuk ke dalam aplikasi.
+  - **Authorization** adalah proses untuk menentukan apakah pengguna yang sudah terotentikasi memiliki izin untuk mengakses sumber daya tertentu atau melakukan tindakan tertentu dalam aplikasi.
+    - Contohnya adalah menentukan apakah pengguna tertentu dapat mengedit data, menghapus entri, atau mengakses halaman tertentu berdasarkan peran mereka.
+  
+  **Proses Saat Pengguna Login**
+  - Saat pengguna melakukan login, sistem akan melakukan authentication terlebih dahulu. Jika pengguna berhasil diotentikasi (misalnya, dengan memverifikasi nama pengguna dan kata sandi), maka pengguna akan dianggap sebagai pengguna yang terautentikasi. Selanjutnya, authorization akan menentukan apa yang boleh dan tidak boleh dilakukan oleh pengguna tersebut berdasarkan hak akses yang telah diberikan.
+
+  **Implementasi pada Django**
+  - **Authentication**
+    Django menyediakan sistem authentication built-in yang mudah digunakan. Anda bisa menggunakan model `User` dari `django.contrib.auth.models`, yang menyediakan metode untuk memverifikasi kredensial pengguna.
+  - **Authorization**
+    Setelah pengguna berhasil login, Django memungkinkan Anda untuk mengatur izin (permissions) untuk pengguna dan grup. Anda dapat menggunakan decorators seperti `@login_required` untuk melindungi view dari akses pengguna yang tidak terautentikasi.
+    
+  ## 5. Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+  Django mengingat pengguna yang telah login melalui penggunaan session yang disimpan di cookies. Saat pengguna berhasil login, Django membuat session untuk pengguna tersebut dan menyimpan session ID di dalam cookie di sisi klien. Setiap kali pengguna mengirimkan request baru ke server, browser mereka mengirimkan cookie tersebut, sehingga Django dapat mengidentifikasi session yang sesuai dengan pengguna tersebut. Inilah bagaimana Django "mengingat" pengguna yang sudah login dalam sesi selanjutnya tanpa perlu login ulang selama session tersebut masih aktif.
+
+  ### Kegunaan Lain dari Cookies:
+  1. **Penyimpanan Preferensi Pengguna**
+  - Cookies sering digunakan untuk menyimpan preferensi pengguna, seperti pilihan bahasa, tema, atau pengaturan lainnya yang membuat pengalaman pengguna lebih personal.
+  2. **Pelacakan Pengguna (Tracking)**
+  - Cookies dapat digunakan untuk melacak aktivitas pengguna di berbagai halaman atau situs web, seperti untuk tujuan analitik atau personalisasi iklan.
+  3. **Keranjang Belanja (Shopping Cart)**
+  - Cookies dapat menyimpan data sementara seperti barang-barang yang ditambahkan ke keranjang belanja selama pengguna menjelajahi situs e-commerce.
+
+  ### Apakah semua Cookies aman?
+  Tidak semua cookies aman, dan penggunaannya bisa menghadirkan risiko keamanan jika tidak dikelola dengan benar. Beberapa faktor yang perlu dipertimbangkan:
+  1. **Cookies Aman (Secure Cookies)**
+  - Cookies dapat diatur untuk hanya dikirimkan melalui koneksi aman (HTTPS) dengan menggunakan atribut Secure. Ini memastikan bahwa cookies tidak bocor selama pengiriman dalam jaringan yang tidak aman.
+  2. **HttpOnly Cookies**
+  - Atribut HttpOnly dapat diterapkan pada cookies untuk mencegah akses mereka dari JavaScript. Ini mencegah serangan Cross-Site Scripting (XSS), di mana penyerang bisa mencuri cookies pengguna melalui skrip yang disisipkan.
+  3. **Cross-Site Request Forgery (CSRF)**
+  - Cookies juga rentan terhadap serangan CSRF, di mana penyerang bisa mengeksploitasi session cookies untuk mengirimkan request yang tampak sah atas nama pengguna. Django mengatasi masalah ini dengan menggunakan token CSRF yang harus dikirim bersama request POST untuk memverifikasi bahwa request benar-benar berasal dari pengguna yang terautentikasi.
+  4. **Cookies yang Tersimpan Secara Tidak Aman**
+  - Cookies yang tidak dienkripsi atau disimpan di klien tanpa pengamanan dapat dengan mudah dicuri atau dimodifikasi oleh pihak ketiga jika situs web atau aplikasi tidak menggunakan metode pengamanan seperti HTTPS.
+
 </details>
