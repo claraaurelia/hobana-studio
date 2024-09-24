@@ -16,7 +16,7 @@ from django.urls import reverse
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
-    product_entries = ProductEntry.objects.fitler(user=request.user)
+    product_entries = ProductEntry.objects.filter(user=request.user)
     context = {
         'aplikasi' : 'hobana studio',
         'npm' : '2306217304',
