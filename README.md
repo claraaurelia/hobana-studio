@@ -1074,3 +1074,98 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
   - Cookies yang tidak dienkripsi atau disimpan di klien tanpa pengamanan dapat dengan mudah dicuri atau dimodifikasi oleh pihak ketiga jika situs web atau aplikasi tidak menggunakan metode pengamanan seperti HTTPS.
 
 </details>
+
+<details>
+  <summary> Tugas Individu 5 : Desain Web menggunakan HTML, CSS dan Framework CSS</summary>
+  Nama    : Clara Aurelia Setiady  <br>
+  NPM     : 23036217304  <br>
+  Kelas   : PBP C  
+  
+  ## 1 Pengimpelemntasan checklist
+
+  ## 2. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+  Urutan prioritas dalam pengambilan CSS selector berdasarkan spesifisitas dan kepentingan adalah:
+
+  1. !important
+  2. Inline styles
+  3. ID selectors
+  4. Class selectors, attribute selectors, pseudo-classes
+  5. Type selectors, pseudo-elements
+  6. Urutan penulisan dalam CSS
+
+  ## 3. Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!
+  1. **Pengalaman Pengguna yang Baik:**
+  Responsive design memastikan bahwa pengguna mendapatkan pengalaman yang baik di berbagai perangkat, baik itu desktop, tablet, maupun smartphone. Ini membantu pengguna menavigasi dan berinteraksi dengan aplikasi web tanpa kesulitan.
+  
+  2. **Meningkatkan Aksesibilitas:**
+  Dengan desain responsif, aplikasi web dapat diakses oleh lebih banyak orang, termasuk mereka yang menggunakan perangkat dengan ukuran layar yang berbeda. Ini penting dalam memastikan inklusivitas.
+
+  3. **Efisiensi Pengembangan:**
+  Dengan responsive design, pengembang dapat menggunakan satu basis kode untuk berbagai perangkat, mengurangi waktu dan biaya pengembangan. Ini juga mengurangi kebutuhan untuk mengembangkan versi terpisah dari aplikasi untuk berbagai perangkat.
+
+  4. **Adaptasi Terhadap Perubahan Teknologi:**
+  Mengingat berbagai perangkat baru dan ukuran layar yang terus berkembang, desain responsif membantu aplikasi tetap relevan dan fungsional di masa depan.
+
+  ### Contoh Aplikasi
+  - Contoh Aplikasi yang sudah menerapkan responsive design: https://www.airbnb.com/
+  - Contoh Aplikasi yang belum menerapkan responsive design: https://www.republika.co.id/
+
+  ## 4. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+  1. **Margin**
+  Margin adalah ruang di luar elemen. Ini menciptakan jarak antara elemen yang satu dengan elemen yang lain. Margin tidak mempengaruhi ukuran elemen itu sendiri, tetapi memberikan ruang di sekelilingnya.
+  - **Cara Implementasi**
+    ```
+    .contoh {
+      margin-top: 10px;    /* Margin atas */
+      margin-right: 15px;  /* Margin kanan */
+      margin-bottom: 10px; /* Margin bawah */
+      margin-left: 15px;   /* Margin kiri */
+    }
+    ```
+  
+  2. **Border**
+  Border adalah garis yang mengelilingi elemen. Border memberikan batas visual untuk elemen dan bisa disesuaikan dalam hal ketebalan, warna, dan jenis garis (solid, dashed, dotted, dll.).
+  - **Cara Implementasi**
+    ```
+    .contoh {
+        border-top: 1px dashed red;    /* Border atas */
+        border-right: 2px solid green; /* Border kanan */
+        border-bottom: 3px dotted blue; /* Border bawah */
+        border-left: 4px double purple; /* Border kiri */
+    }
+
+    ```
+
+  3. **Padding**
+  Padding adalah ruang di dalam elemen, antara konten dan batas (border) elemen tersebut. Padding mempengaruhi ukuran elemen, karena padding ditambahkan ke ukuran konten.
+  - **Cara Implementasi**
+    ```
+    .contoh {
+        padding-top: 10px;    /* Padding atas */
+        padding-right: 15px;  /* Padding kanan */
+        padding-bottom: 10px; /* Padding bawah */
+        padding-left: 15px;   /* Padding kiri */
+    }
+
+    ```
+
+
+  ## 5. Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+  1. **Flexbox**
+  Flexbox adalah layout satu dimensi yang dirancang untuk mengatur elemen dalam satu baris (row) atau satu kolom (column). Konsep utama dari flexbox adalah kemampuan untuk mendistribusikan ruang secara dinamis antara elemen-elemen dan mengatur alignment mereka dalam sebuah wadah (container).
+  - **Kegunaan**
+    - Sangat baik untuk mengatur tata letak elemen secara horizontal atau vertikal.
+    - Mengutamakan fleksibilitas untuk mengatur ukuran elemen berdasarkan ruang yang tersedia.
+    - Cocok untuk tata letak yang responsif dan elemen yang perlu disesuaikan dengan perubahan ukuran layar, seperti menata navbar, card layout, atau tombol.
+  
+  2. **Grid Layout**
+  CSS Grid adalah layout dua dimensi yang lebih kompleks dibandingkan dengan flexbox. Grid memungkinkan pengaturan elemen baik secara horizontal (rows) maupun vertikal (columns), dan menawarkan kontrol yang lebih mendetail terhadap tata letak elemen dalam baris dan kolom.
+  - **Kegunaan**
+    - Sangat ideal untuk tata letak yang lebih kompleks dan detail, seperti mendesain halaman dengan beberapa baris dan kolom yang berbeda ukuran.
+    - Memberikan kendali penuh untuk menyusun elemen-elemen dalam area grid secara spesifik.
+    - Cocok untuk layout halaman web yang lebih kompleks, seperti dashboard, galeri gambar, atau tata letak blog.
+  
+  ### Kesimpulan
+  - Flexbox lebih cocok digunakan untuk tata letak linier satu dimensi (baik baris maupun kolom).
+  - Grid lebih cocok untuk tata letak dua dimensi yang kompleks, di mana diperlukan pengaturan elemen dalam baris dan kolom secara simultan.
+</details>
