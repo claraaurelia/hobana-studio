@@ -1081,7 +1081,219 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
   NPM     : 23036217304  <br>
   Kelas   : PBP C  
   
-  ## 1 Pengimpelemntasan checklist
+  ## 1. Pengimpelemntasan checklist
+  ### A. Implementasikan fungsi menghapus dan mengedeit product
+  - Langkah pertama adalah menambahkan Tailwind pada file `base.html`
+  ```
+  <head>
+  {% block meta %}
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% endblock meta %}
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  </head>
+  ```
+    - `<meta name="viewport">` -> agar responsive
+  - Selanjutnya tambahkan fungsi edit dan hapus pada `views.py`
+  ```
+  def edit_product(request, id):
+    # Get product entry berdasarkan id
+    product = ProductEntry.objects.get(pk = id)
+
+    # Set producct entry sebagai instance dari form
+    form = ProductEntryForm(request.POST or None, instance=mood)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_mood.html", context)
+  ```
+  ```
+  def delete_product(request, id):
+    # Get mood berdasarkan id
+    product = ProductEntry.objects.get(pk = id)
+    # Hapus mood
+    product.delete()
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('main:show_main'))
+  ```
+  - dan buat file html baru pada subdirektori `main/templates`, `edit_product.html`
+  ```
+  {% extends 'base.html' %}
+
+  {% load static %}
+
+  {% block content %}
+
+  <h1>Edit Mood</h1>
+
+  <form method="POST">
+      {% csrf_token %}
+      <table>
+          {{ form.as_table }}
+          <tr>
+              <td></td>
+              <td>
+                  <input type="submit" value="Edit Product"/>
+              </td>
+          </tr>
+      </table>
+  </form>
+
+  {% endblock %}
+  ```
+  - Import pada `urls.py` dan tambahkan path url pada `urlpatterns`
+  ```
+  from main.views import edit_product
+  from main.views import delete_product
+  ```
+  ```
+  ...
+  path('edit-product/<uuid:id>', edit_product, name='edit_product'),
+  ...
+  path('delete/<uuid:id>', delete_product, name='delete_product'), # sesuaikan dengan nama fungsi yang dibuat
+  ...
+  ...
+  ```
+  - Pada `main.html` ubah kode dengan
+  ```
+  ...
+  <tr>
+      ...
+      <td>
+          <a href="{% url 'main:edit_product' product_entry.pk %}">
+              <button>
+                  Edit
+              </button>
+          </a>
+      </td>
+  </tr>
+  ...
+  ```
+  ```
+  ...
+  <tr>
+      ...
+      <td>
+          <a href="{% url 'main:edit_mood' mood_entry.pk %}">
+              <button>
+                  Edit
+              </button>
+          </a>
+      </td>
+      <td>
+          <a href="{% url 'main:delete_mood' mood_entry.pk %}">
+              <button>
+                  Delete
+              </button>
+          </a>
+      </td>
+  </tr>
+  ...
+  ```
+  - Konfigurasi Static Files pada Aplikasi
+  Pada `settings.py`, tambahkan middleware WhiteNoise
+  ```
+  ...
+  MIDDLEWARE = [
+      'django.middleware.security.SecurityMiddleware',
+      'whitenoise.middleware.WhiteNoiseMiddleware', #Tambahkan tepat di bawah SecurityMiddleware
+      ...
+  ]
+  ...
+  ```
+    - WhiteNoise ini membuat Django bisa mengelola file statis secara otomatis dalam mode produksi (DEBUG=False) tanpa perlu konfigurasi yang kompleks
+  - Pada `settings.py`
+  ```
+  ...
+  STATIC_URL = '/static/'
+  if DEBUG:
+      STATICFILES_DIRS = [
+          BASE_DIR / 'static' # merujuk ke /static root project pada mode development
+      ]
+  else:
+      STATIC_ROOT = BASE_DIR / 'static' # merujuk ke /static root project pada mode production
+  ...
+  ```
+
+  ### B. Kustomisasi halaman login, register, dan tambah product
+
+  ### C. Untuk setiap card product, buat dua button untuk mengedit dan menghapus product
+
+  ### D. Buat navigation bar yang responsive
+  - Buat berkas baru html `navbar.html` pada `templates/`
+  ```
+  <nav class="bg-indigo-600 shadow-lg fixed top-0 left-0 z-40 w-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <h1 class="text-2xl font-bold text-center text-white">Mental Health Tracker</h1>
+        </div>
+        <div class="hidden md:flex items-center">
+          {% if user.is_authenticated %}
+            <span class="text-gray-300 mr-4">Welcome, {{ user.username }}</span>
+            <a href="{% url 'main:logout' %}" class="text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+              Logout
+            </a>
+          {% else %}
+            <a href="{% url 'main:login' %}" class="text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 mr-2">
+              Login
+            </a>
+            <a href="{% url 'main:register' %}" class="text-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+              Register
+            </a>
+          {% endif %}
+        </div>
+        <div class="md:hidden flex items-center">
+          <button class="mobile-menu-button">
+            <svg class="w-6 h-6 text-white" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div class="mobile-menu hidden md:hidden  px-4 w-full md:max-w-full">
+      <div class="pt-2 pb-3 space-y-1 mx-auto">
+        {% if user.is_authenticated %}
+          <span class="block text-gray-300 px-3 py-2">Welcome, {{ user.username }}</span>
+          <a href="{% url 'main:logout' %}" class="block text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Logout
+          </a>
+        {% else %}
+          <a href="{% url 'main:login' %}" class="block text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 mb-2">
+            Login
+          </a>
+          <a href="{% url 'main:register' %}" class="block text-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Register
+          </a>
+        {% endif %}
+      </div>
+    </div>
+    <script>
+      const btn = document.querySelector("button.mobile-menu-button");
+      const menu = document.querySelector(".mobile-menu");
+    
+      btn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+      });
+    </script>
+  </nav>
+  ```
+  - Tautkan navbar ke `main.html`, `create_product_entry.html`, `edit_product.html`
+  ```
+  {% extends 'base.html' %}
+  {% block content %}
+  {% include 'navbar.html' %}
+  ...
+  {% endblock content%}
+  ```
+
 
   ## 2. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
   Urutan prioritas dalam pengambilan CSS selector berdasarkan spesifisitas dan kepentingan adalah:
