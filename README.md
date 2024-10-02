@@ -1668,41 +1668,41 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
   ## 4. Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
   1. **Margin**
   Margin adalah ruang di luar elemen. Ini menciptakan jarak antara elemen yang satu dengan elemen yang lain. Margin tidak mempengaruhi ukuran elemen itu sendiri, tetapi memberikan ruang di sekelilingnya.
-  - **Cara Implementasi**
-    ```
-    .contoh {
-      margin-top: 10px;    /* Margin atas */
-      margin-right: 15px;  /* Margin kanan */
-      margin-bottom: 10px; /* Margin bawah */
-      margin-left: 15px;   /* Margin kiri */
-    }
-    ```
+     - **Cara Implementasi**
+       ```
+       .contoh {
+         margin-top: 10px;    /* Margin atas */
+         margin-right: 15px;  /* Margin kanan */
+         margin-bottom: 10px; /* Margin bawah */
+         margin-left: 15px;   /* Margin kiri */
+       }
+       ```
   
   2. **Border**
   Border adalah garis yang mengelilingi elemen. Border memberikan batas visual untuk elemen dan bisa disesuaikan dalam hal ketebalan, warna, dan jenis garis (solid, dashed, dotted, dll.).
-  - **Cara Implementasi**
-    ```
-    .contoh {
-        border-top: 1px dashed red;    /* Border atas */
-        border-right: 2px solid green; /* Border kanan */
-        border-bottom: 3px dotted blue; /* Border bawah */
-        border-left: 4px double purple; /* Border kiri */
-    }
-
-    ```
+     - **Cara Implementasi**
+       ```
+       .contoh {
+           border-top: 1px dashed red;    /* Border atas */
+           border-right: 2px solid green; /* Border kanan */
+           border-bottom: 3px dotted blue; /* Border bawah */
+           border-left: 4px double purple; /* Border kiri */
+       }
+   
+       ```
 
   3. **Padding**
   Padding adalah ruang di dalam elemen, antara konten dan batas (border) elemen tersebut. Padding mempengaruhi ukuran elemen, karena padding ditambahkan ke ukuran konten.
-  - **Cara Implementasi**
-    ```
-    .contoh {
-        padding-top: 10px;    /* Padding atas */
-        padding-right: 15px;  /* Padding kanan */
-        padding-bottom: 10px; /* Padding bawah */
-        padding-left: 15px;   /* Padding kiri */
-    }
-
-    ```
+     - **Cara Implementasi**
+       ```
+       .contoh {
+           padding-top: 10px;    /* Padding atas */
+           padding-right: 15px;  /* Padding kanan */
+           padding-bottom: 10px; /* Padding bawah */
+           padding-left: 15px;   /* Padding kiri */
+       }
+   
+       ```
 
 
   ## 5. Jelaskan konsep flex box dan grid layout beserta kegunaannya!
