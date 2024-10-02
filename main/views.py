@@ -96,7 +96,7 @@ def edit_product(request, id):
     product = ProductEntry.objects.get(pk = id)
 
     # Set producct entry sebagai instance dari form
-    form = ProductEntryForm(request.POST or None, instance=mood)
+    form = ProductEntryForm(request.POST or None, instance=product)
 
     if form.is_valid() and request.method == "POST":
         # Simpan form dan kembali ke halaman awal
@@ -104,12 +104,12 @@ def edit_product(request, id):
         return HttpResponseRedirect(reverse('main:show_main'))
 
     context = {'form': form}
-    return render(request, "edit_mood.html", context)
+    return render(request, "edit_product.html", context)
 
 def delete_product(request, id):
-    # Get mood berdasarkan id
+    # Get product berdasarkan id
     product = ProductEntry.objects.get(pk = id)
-    # Hapus mood
+    # Hapus product
     product.delete()
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
