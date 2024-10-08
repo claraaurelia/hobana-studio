@@ -2071,6 +2071,12 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
   Dengan menggunakan decorator csrf_exempt, kita memberi tahu Django bahwa view ini tidak memerlukan pengecekan token CSRF, sehingga request AJAX POST bisa diterima dan diproses tanpa harus memvalidasi token CSRF. Ini sering digunakan pada API atau endpoint yang berkomunikasi dengan aplikasi frontend yang tidak menggunakan token CSRF.
 
   ## 5. Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+  Pembersihan data input pengguna di backend perlu dilakukan juga karena:
+  - **Keamanan**
+    Validasi dan pembersihan input di frontend dapat dengan mudah dihindari oleh pengguna yang mengubah kode atau memanipulasi request sebelum mengirimkannya ke server. Oleh karena itu, sangat penting untuk membersihkan data di backend agar melindungi sistem dari serangan seperti injection attacks (contohnya SQL injection, XSS) dan data berbahaya lainnya.
+  - **Integritas Data**
+    Backend bertanggung jawab untuk memastikan bahwa data yang masuk ke dalam sistem konsisten, sesuai dengan format yang diharapkan, dan bebas dari error. Jika hanya bergantung pada frontend, ada kemungkinan data yang masuk ke backend bisa rusak atau salah format.
+  - **Kontrol Penuh**
+    Backend memiliki kontrol penuh atas bagaimana data diproses sebelum dimasukkan ke dalam sistem, sehingga mengurangi risiko data yang tidak diinginkan masuk ke dalam database.
 
-  ## 6. 
 </details>
