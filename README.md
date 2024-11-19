@@ -2043,19 +2043,19 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
 
 
   ## 2. Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
-  1. **Interaktivitas**
+  1. **Interaktivitas**\n
   JavaScript memungkinkan developer untuk membuat fitur interaktif seperti validasi formulir, popup dinamis, animasi, dan manipulasi konten halaman tanpa memuat ulang halaman secara keseluruhan.
 
-  2. **Kustomisasi Tampilan Real-Time**
+  2. **Kustomisasi Tampilan Real-Time**\n
   Dengan JavaScript, konten halaman web dapat diubah secara dinamis tanpa harus memuat ulang seluruh halaman. Misalnya, elemen-elemen seperti menu dropdown, efek hover, dan tampilan produk dapat dimanipulasi secara langsung.
 
-  3. **Ekosistem yang Luas**
+  3. **Ekosistem yang Luas**\n
   JavaScript memiliki ekosistem yang sangat besar, dengan banyak library, plugin, dan alat bantu yang memudahkan pengembangan berbagai fitur. Developer dapat dengan mudah menemukan solusi untuk berbagai kebutuhan tanpa harus membangun segalanya dari awal.
 
-  4. **Komunitas dan Dukungan Luas**
+  4. **Komunitas dan Dukungan Luas**\n
   Karena JavaScript adalah salah satu bahasa pemrograman paling populer di dunia, ada komunitas besar yang menyediakan dukungan, tutorial, dan solusi untuk berbagai masalah pengembangan.
 
-  5. **Pengolahan di Sisi Klien (Client-side Processing)**
+  5. **Pengolahan di Sisi Klien (Client-side Processing)**\n
   JavaScript dijalankan di browser pengguna, yang mengurangi beban server dan mempercepat respons aplikasi web. Ini membuat aplikasi terasa lebih responsif, terutama untuk operasi sederhana seperti validasi input.
 
   ## 3. Jelaskan fungsi dari penggunaan `await` ketika kita menggunakan `fetch()!` Apa yang akan terjadi jika kita tidak menggunakan `await`?
@@ -2072,11 +2072,11 @@ Menurut saya, XML dan JSON masing-masing memiliki kelebihan masing-masing. Meski
 
   ## 5. Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
   Pembersihan data input pengguna di backend perlu dilakukan juga karena:
-  - **Keamanan**
+  - **Keamanan**\n
     Validasi dan pembersihan input di frontend dapat dengan mudah dihindari oleh pengguna yang mengubah kode atau memanipulasi request sebelum mengirimkannya ke server. Oleh karena itu, sangat penting untuk membersihkan data di backend agar melindungi sistem dari serangan seperti injection attacks (contohnya SQL injection, XSS) dan data berbahaya lainnya.
-  - **Integritas Data**
+  - **Integritas Data**\n
     Backend bertanggung jawab untuk memastikan bahwa data yang masuk ke dalam sistem konsisten, sesuai dengan format yang diharapkan, dan bebas dari error. Jika hanya bergantung pada frontend, ada kemungkinan data yang masuk ke backend bisa rusak atau salah format.
-  - **Kontrol Penuh**
+  - **Kontrol Penuh**\n
     Backend memiliki kontrol penuh atas bagaimana data diproses sebelum dimasukkan ke dalam sistem, sehingga mengurangi risiko data yang tidak diinginkan masuk ke dalam database.
 
 </details>

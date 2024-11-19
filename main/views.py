@@ -14,6 +14,8 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.utils.html import strip_tags
+import json
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -50,6 +52,14 @@ def show_json(request):
     data = ProductEntry.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
+# def show_json(request):
+#     # Filter berdasarkan username pengguna yang sedang login
+#     username = request.user.username  # Ambil username dari request user yang sedang login
+#     products = ProductEntry.objects.filter(user__username=username)  # Filter produk berdasarkan username
+#     data = list(products.values('id', 'product_name', 'product_price', 'product_description', 'user__username'))
+
+#     return JsonResponse(data, safe=False)
+    
 def show_xml_by_id(request, id):
     data = ProductEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
@@ -135,3 +145,31 @@ def add_product_entry_ajax(request):
     new_product.save()
 
     return HttpResponse(b"CREATED", status=201)
+
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+
+        print("DATANYA YANG INI:",data)
+        new_product = ProductEntry.objects.create(
+            user=request.user,
+            product_name=data["product_name"],
+            product_price=int(data["product_price"]),
+            product_description=data["product_description"],
+            # username = data["username"]
+        )
+
+        print("dari sini")
+        print(request.user)
+        print(data["product_name"])
+        print(data["product_price"])
+        print(data["product_description"])
+        # print(data["username"])
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
